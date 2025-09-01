@@ -15,12 +15,25 @@ class Game:
         self.level = 1
         self.game_over = False
         self.target_number = None
-        self.max_attempts = 5
+        self.max_attempts = None
 
     def start_game(self):
         """Start the game"""
         print("Welcome to the Number Guessing Game!")
         print("Try to guess the number between 1 and 100.")
+
+        # Ask player for number of attempts
+        while self.max_attempts is None:
+            try:
+                max_attempts_input = input("How many guesses would you like per level? (1-10): ")
+                self.max_attempts = int(max_attempts_input)
+
+                if self.max_attempts < 1 or self.max_attempts > 10:
+                    print("Please enter a number between 1 and 10.")
+                    self.max_attempts = None
+            except ValueError:
+                print("Invalid input. Please enter a valid number.")
+
         self.game_loop()
 
     def game_loop(self):
