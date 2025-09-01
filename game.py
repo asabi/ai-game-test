@@ -14,31 +14,73 @@ class Game:
         self.score = 0
         self.level = 1
         self.game_over = False
-    
+        self.target_number = None
+        self.max_attempts = 5
+
     def start_game(self):
         """Start the game"""
-        print("Game started!")
+        print("Welcome to the Number Guessing Game!")
+        print("Try to guess the number between 1 and 100.")
         self.game_loop()
-    
+
     def game_loop(self):
         """Main game loop"""
         while not self.game_over:
+            self.new_level()
             self.update()
             self.render()
             time.sleep(0.1)
-    
+
+    def new_level(self):
+        """Start a new level with a new target number"""
+        self.target_number = random.randint(1, 100)
+        print(f"\n--- Level {self.level} ---")
+        print("Guess the number between 1 and 100.")
+
     def update(self):
-        """Update game state"""
-        pass
-    
+        """Update game state by getting user input and checking guesses"""
+        attempts = 0
+        while attempts < self.max_attempts:
+            try:
+                guess = int(input(f"Attempt {attempts+1}/{self.max_attempts}: Enter your guess: "))
+
+                if guess < 1 or guess > 100:
+                    print("Please enter a number between 1 and 100.")
+                    continue
+
+                attempts += 1
+
+                if guess < self.target_number:
+                    print("Too low!")
+                elif guess > self.target_number:
+                    print("Too high!")
+                else:
+                    print(f"Correct! You've guessed the number {self.target_number}.")
+                    self.score += (self.max_attempts - attempts + 1) * 10
+                    self.level += 1
+                    return
+
+                if attempts == self.max_attempts:
+                    print(f"Out of attempts! The number was {self.target_number}.")
+
+            except ValueError:
+                print("Invalid input. Please enter a valid number.")
+
+        # Ask if the player wants to continue after running out of attempts
+        play_again = input("Do you want to try the next level? (yes/no): ").strip().lower()
+        if play_again != 'yes':
+            self.end_game()
+
     def render(self):
-        """Render the game"""
-        pass
-    
+        """Render the game state"""
+        print(f"\nCurrent Score: {self.score}")
+        print(f"Level: {self.level}")
+
     def end_game(self):
         """End the game"""
         self.game_over = True
-        print(f"Game Over! Final Score: {self.score}")
+        print(f"\nGame Over! Final Score: {self.score}")
+        print("Thanks for playing!")
 
 if __name__ == "__main__":
     game = Game()
