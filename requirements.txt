@@ -1,1 +1,1 @@
-# No external dependencies required\n
+python-dotenv
