@@ -1,8 +1,7 @@
-# Number Guessing Game
+# Game Configuration
 
-A simple number guessing game application.
+This project allows users to configure the number of guesses for the game through environment variables.
 
-## Task
-Create a simple number guessing game where players try to guess a randomly generated number between 1 and 100 within a limited number of attempts.
+## Setup
 
-## Usage
+1. Create a `.env` file in the root directory with the following content:
