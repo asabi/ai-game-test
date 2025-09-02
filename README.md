@@ -1,7 +1,35 @@
-# Game Configuration
+# Guessing Game
 
-This project allows users to configure the number of guesses for the game through environment variables.
+This is a simple guessing game where players can select the number of guesses at the beginning of the game.
 
 ## Setup
 
-1. Create a `.env` file in the root directory with the following content:
+1. Clone the repository:
+   ```
+   git clone <repository_url>
+   cd <repository_directory>
+   ```
+
+2. Install dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
+
+3. Create a `.env` file with your desired minimum and maximum attempts:
+   ```
+   MIN_ATTEMPTS=1
+   MAX_ATTEMPTS=10
+   ```
+
+4. Run the game:
+   ```
+   python game.py
+   ```
+
+## Configuration
+
+You can configure the minimum and maximum number of guesses by modifying the `.env` file.
+
+## Testing
+
+To test the game, simply run it with different values in the `.env` file.
