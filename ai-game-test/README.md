@@ -1,6 +1,6 @@
 # Guessing Game
 
-This is a simple guessing game where players can select the number of guesses at the beginning of the game.
+This is a simple guessing game where players can select the number of guesses at the beginning of the game. The game now has a Streamlit interface for better user experience.
 
 ## Setup
 
@@ -21,9 +21,9 @@ This is a simple guessing game where players can select the number of guesses at
    MAX_ATTEMPTS=10
    ```
 
-4. Run the game:
+4. Run the Streamlit game interface:
    ```
-   python game.py
+   streamlit run streamlit_game.py
    ```
 
 ## Configuration
