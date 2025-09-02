@@ -1,17 +1,35 @@
-# Number Guessing Game
+# Guessing Game
 
-A simple number guessing game application.
+This is a simple guessing game where players can select the number of guesses at the beginning of the game.
 
-## Task
-Create a simple number guessing game where players try to guess a randomly generated number between 1 and 100 within a limited number of attempts that they can select at the beginning of the game.
+## Setup
 
-## Usage
-1. Run the game using `python3 game.py`
-2. Enter the number of guesses you want per level when prompted (between 1 and 10)
-3. Try to guess the number between 1 and 100 within your selected number of attempts
-4. The game will continue to new levels if you choose to do so after running out of attempts
+1. Clone the repository:
+   ```
+   git clone <repository_url>
+   cd <repository_directory>
+   ```
 
-## Features
-- Customizable number of attempts per level
-- Score tracking based on performance
-- Level progression system
+2. Install dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
+
+3. Create a `.env` file with your desired minimum and maximum attempts:
+   ```
+   MIN_ATTEMPTS=1
+   MAX_ATTEMPTS=10
+   ```
+
+4. Run the game:
+   ```
+   python game.py
+   ```
+
+## Configuration
+
+You can configure the minimum and maximum number of guesses by modifying the `.env` file.
+
+## Testing
+
+To test the game, simply run it with different values in the `.env` file.

@@ -8,32 +8,40 @@ Task: Create a simple number guessing game
 
 import random
 import time
+import os
+from dotenv import load_dotenv
 
 class Game:
     def __init__(self):
+        # Load environment variables from .env file
+        load_dotenv()
+        self.min_attempts = int(os.getenv('MIN_ATTEMPTS', 1))
+        self.max_attempts = int(os.getenv('MAX_ATTEMPTS', 10))
+
         self.score = 0
         self.level = 1
         self.game_over = False
         self.target_number = None
-        self.max_attempts = None
+        self.max_attempts_selected = None
 
     def start_game(self):
         """Start the game"""
         print("Welcome to the Number Guessing Game!")
         print("Try to guess the number between 1 and 100.")
 
-        # Ask player for number of attempts
-        while self.max_attempts is None:
+        # Ask player for number of attempts with validation
+        while self.max_attempts_selected is None:
             try:
-                max_attempts_input = input("How many guesses would you like per level? (1-10): ")
-                self.max_attempts = int(max_attempts_input)
+                max_attempts_input = input(f"How many guesses would you like per level? (between {self.min_attempts} and {self.max_attempts}): ")
+                self.max_attempts_selected = int(max_attempts_input)
 
-                if self.max_attempts < 1 or self.max_attempts > 10:
-                    print("Please enter a number between 1 and 10.")
-                    self.max_attempts = None
+                if self.max_attempts_selected < self.min_attempts or self.max_attempts_selected > self.max_attempts:
+                    print(f"Please enter a number between {self.min_attempts} and {self.max_attempts}.")
+                    self.max_attempts_selected = None
             except ValueError:
                 print("Invalid input. Please enter a valid number.")
 
+        print(f"You have selected {self.max_attempts_selected} guesses per level.")
         self.game_loop()
 
     def game_loop(self):
@@ -53,9 +61,9 @@ class Game:
     def update(self):
         """Update game state by getting user input and checking guesses"""
         attempts = 0
-        while attempts < self.max_attempts:
+        while attempts < self.max_attempts_selected:
             try:
-                guess = int(input(f"Attempt {attempts+1}/{self.max_attempts}: Enter your guess: "))
+                guess = int(input(f"Attempt {attempts+1}/{self.max_attempts_selected}: Enter your guess: "))
 
                 if guess < 1 or guess > 100:
                     print("Please enter a number between 1 and 100.")
@@ -69,11 +77,11 @@ class Game:
                     print("Too high!")
                 else:
                     print(f"Correct! You've guessed the number {self.target_number}.")
-                    self.score += (self.max_attempts - attempts + 1) * 10
+                    self.score += (self.max_attempts_selected - attempts + 1) * 10
                     self.level += 1
                     return
 
-                if attempts == self.max_attempts:
+                if attempts == self.max_attempts_selected:
                     print(f"Out of attempts! The number was {self.target_number}.")
 
             except ValueError:
